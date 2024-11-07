@@ -34,6 +34,7 @@ public class PlaneController : MonoBehaviour
 
     //stall variables
     private bool isStalling = false;
+    private bool onRunway = false;
     public float stallAOA = 15f;   // Critical angle of attack in degrees
     private float stallSpeed = 50f; // Minimum speed to stall    
 
@@ -136,11 +137,29 @@ public class PlaneController : MonoBehaviour
         localGs = invRotation * localAcc;
     }
 
+    void OnCollisionEnter(Collision collision){
+    if (collision.gameObject.CompareTag("Runway"))
+    {
+        onRunway = true;
+        Debug.Log("Plane has landed on the runway!");
+    }
+    }
+
+    void OnCollisionExit(Collision collision){
+    if (collision.gameObject.CompareTag("Runway"))
+    {
+        onRunway = false;
+        Debug.Log("Plane has left the runway!");
+    }
+    }
+
     void CheckForStall() {
         bool speedStall = localVEL.z < stallSpeed;
         bool angleStall = Mathf.Abs(AOA) > stallAOA;
 
-        if(rb.position.y > 5){
+
+        //allow plane not to stall on runway
+        if(onRunway == false){
             isStalling = speedStall || angleStall;
         }else{
             isStalling = false;
@@ -325,12 +344,6 @@ public class PlaneController : MonoBehaviour
     }
 
     private void FixedUpdate(){
-
-        //move flaps based on inputs
-        //aileronL.transform.localRotation = Quaternion.Euler((roll*-20), roll*-4, 0);
-        //aileronR.transform.localRotation = Quaternion.Euler((roll*20),roll*-4, 0);
-        //elevator.transform.localRotation = Quaternion.Euler((pitch * -30) , 0, 0);
-        //rudder.transform.localRotation = Quaternion.Euler(0,0,-(yaw*20));
 
         float dt = Time.fixedDeltaTime;
 

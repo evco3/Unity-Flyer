@@ -380,14 +380,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460145490}
-  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 5.5, z: -20.37}
+  m_LocalRotation: {x: -0.0063256067, y: -0, z: -0, w: 0.99998}
+  m_LocalPosition: {x: 0, y: 6.77, z: -14.68}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2064966142}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.725, y: 0, z: 0}
 --- !u!4 &595031473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 615010087132965700, guid: 426e560e97af2d64ca46c3484e244231, type: 3}
@@ -519,7 +519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959095706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.32, y: 9.3, z: 0}
+  m_LocalPosition: {x: 1115, y: 9.3, z: -149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -545,6 +545,7 @@ MonoBehaviour:
   - {fileID: 956546906}
   speed: 200
   plane: {fileID: 1695548915}
+  smoothTime: 0.3
 --- !u!1 &1034217791
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +793,7 @@ GameObject:
   - component: {fileID: 1892818320}
   m_Layer: 0
   m_Name: Runway
-  m_TagString: Untagged
+  m_TagString: Runway
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -804,7 +805,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892818319}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 061039dfd77254557ab1515b9ce6b717, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -876,8 +877,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892818319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 642.56, y: 29.1, z: -280}
-  m_LocalScale: {x: 200, y: 1, z: 30}
+  m_LocalPosition: {x: 500, y: 29.1, z: -280}
+  m_LocalScale: {x: 500, y: 1, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -929,7 +930,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064966141}
   serializedVersion: 4
-  m_Mass: 1000
+  m_Mass: 800
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -961,10 +962,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throttleIncrement: 0.1
-  maxThrust: 125
-  responsiveness: 2
-  liftPower: 4
-  inducedDrag: 0.04
+  maxThrust: 60
+  responsiveness: 1
+  liftPower: 3.8
+  inducedDrag: 0.1
   flapLift: 50
   flapAOA: 10
   stallAOA: 75
@@ -1078,7 +1079,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 99.87689
-      value: 0.50139236
+      value: 0.60295486
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1211,8 +1212,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.107941955
     - serializedVersion: 3
-      time: 98.77666
-      value: 0.99477863
+      time: 99.81877
+      value: 0.7569933
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1391,7 +1392,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
 --- !u!4 &2147269677
 Transform:

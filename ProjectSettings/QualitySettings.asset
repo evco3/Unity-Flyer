@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 2
+  m_CurrentQuality: 3
   m_QualitySettings:
   - serializedVersion: 3
     name: Very Low
@@ -117,7 +117,7 @@ QualitySettings:
     skinWeights: 2
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
-    anisotropicTextures: 1
+    anisotropicTextures: 0
     antiAliasing: 0
     softParticles: 0
     softVegetation: 0
@@ -134,7 +134,7 @@ QualitySettings:
     streamingMipmapsRenderersPerFrame: 512
     streamingMipmapsMaxLevelReduction: 2
     streamingMipmapsMaxFileIORequests: 1024
-    particleRaycastBudget: 64
+    particleRaycastBudget: 32
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
@@ -145,7 +145,7 @@ QualitySettings:
     terrainDetailDensityScale: 1
     terrainBasemapDistance: 1000
     terrainDetailDistance: 80
-    terrainTreeDistance: 5000
+    terrainTreeDistance: 1693
     terrainBillboardStart: 50
     terrainFadeLength: 5
     terrainMaxTrees: 50

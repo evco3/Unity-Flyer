@@ -11,6 +11,10 @@ public class CameraController : MonoBehaviour
     private int index = 0;
     private Vector3 target;
 
+    private Vector3 velocity = Vector3.zero;
+    [SerializeField] float smoothTime = 0.1f;
+
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1)) index = 0;
@@ -24,17 +28,17 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
+        //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         //transform.rotation = Quaternion.Lerp(transform.rotation, plane.rotation, speed * Time.deltaTime);
 
         //make camera point at plane regardless of position
-        if(index != 2)
-            transform.LookAt(plane);
+        if(index != 2){
+            // Look at the plane with a delayed rotation
+            Quaternion lookRotation = Quaternion.LookRotation(plane.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, speed * Time.deltaTime);
+        }
         else
             transform.rotation = Quaternion.Lerp(transform.rotation, plane.rotation, speed * Time.deltaTime);
-
-        //clamp height above 6
-        //if(transform.position.y < 6) transform.position = new Vector3(transform.position.x, 6, transform.position.z);
-
     }
 }
