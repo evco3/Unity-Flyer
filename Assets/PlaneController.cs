@@ -51,12 +51,19 @@ public class PlaneController : MonoBehaviour
     bool gearDeployed = false;
     bool flapsDeployed = false;
 
+    //control surface power
+    private float pitchSpeed = 0f;
+    private float rollSpeed = 0f;
+    private float yawSpeed = 0f;
+
     //local velocity vecotrs
     private Vector3 Velocity;
     private Vector3 localVEL;
     private Vector3 localANGVEL;
     private Vector3 localGs;
     private Vector3 lastVEl;
+
+    
 
     Vector3 controlInput;
 
@@ -193,14 +200,6 @@ public class PlaneController : MonoBehaviour
             float gearDrag = gearDeployed ? 0.5f : 0f;
             float flapsDrag = flapsDeployed ? 0.5f : 0f;
 
-            /*var DragCO = Scale6(lv.normalized, dragRight.Evaluate(Mathf.Abs(lv.x)),
-                                            dragLeft.Evaluate(Mathf.Abs(lv.x)),
-                                            dragUp.Evaluate(Mathf.Abs(lv.y)),
-                                            dragDown.Evaluate(Mathf.Abs(lv.y)),
-                                            dragForward.Evaluate(Mathf.Abs(lv.z)) + airbrakeDrag + gearDrag + flapsDrag,
-                                            dragBack.Evaluate(Mathf.Abs(lv.z)));
-            */
-
             //split up drag into each dimensionn
             float dragX = dragRight.Evaluate(Mathf.Abs(lv.x));
             float dragY = dragUp.Evaluate(Mathf.Abs(lv.y));
@@ -293,13 +292,20 @@ public class PlaneController : MonoBehaviour
         var speed = Mathf.Max(0, localVEL.z);
         var steering = SteeringCurve.Evaluate(speed);
 
+        float pitchSmooth = 0.1f;
+        float yawSmooth = 0.1f;
+        float rollSmooth = 0.25f;
 
         var target = Vector3.Scale(controlInput, turnspeed * steering);
         var av = localANGVEL * Mathf.Rad2Deg;
 
-        var correction = new Vector3(CalculateSteering(dt, av.x, target.x, turnAccel.x),
-                                      CalculateSteering(dt, av.y, target.y, turnAccel.y),
-                                      CalculateSteering(dt, av.z, target.z, turnAccel.z));
+        float targetPitch = Mathf.SmoothDamp(av.x, target.x, ref pitchSpeed, pitchSmooth);
+        float targetYaw = Mathf.SmoothDamp(av.y, target.y, ref yawSpeed, yawSmooth);
+        float targetRoll = Mathf.SmoothDamp(av.z, target.z, ref rollSpeed, rollSmooth);
+
+        var correction = new Vector3(CalculateSteering(dt, av.x, targetPitch, turnAccel.x),
+                                      CalculateSteering(dt, av.y, targetYaw, turnAccel.y),
+                                      CalculateSteering(dt, av.z, targetRoll, turnAccel.z));
 
         
         //print("localVEl:" + localVEL + " steering force: " + correction + " target: " + target + " av: " + av);

@@ -28,11 +28,9 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
-        //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, plane.rotation, speed * Time.deltaTime);
-
-        //make camera point at plane regardless of position
+        if(index == 0)
+            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
+        
         if(index != 2){
             // Look at the plane with a delayed rotation
             Quaternion lookRotation = Quaternion.LookRotation(plane.position - transform.position);
