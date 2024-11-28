@@ -84,7 +84,7 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private Vector3 turnAccel;
     [SerializeField] private AnimationCurve SteeringCurve;
 
-
+    [SerializeField] private AnimatoinCurve throttleCurve;
 
 
     private float responseModifier{
